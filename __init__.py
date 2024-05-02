@@ -82,6 +82,7 @@ class PointCloudDisplaySettingsPanel(bpy.types.Panel):
     def draw(self, context):
         self.layout.enabled = type(context.object.data) == bpy.types.Mesh
         row = self.layout.row()
+        row.alignment = 'LEFT'
         row.prop(context.object.data.point_cloud_display, "enabled")
         row.prop(context.object.data.point_cloud_display, "point_size")
 

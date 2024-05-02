@@ -132,14 +132,14 @@ def register():
     bpy.utils.register_class(PointCloudDisplaySettings3DViewPanel)
     bpy.types.VIEW3D_PT_view3d_properties.append(PointCloudDisplaySettingsPanel)
     bpy.types.Mesh.point_cloud_display = bpy.props.PointerProperty(type=PointCloudDisplaySettings)
-    render_hook = bpy.types.SpaceView3D.draw_handler_add(draw_point_clouds, (), 'WINDOW', 'POST_VIEW')
+    bpy.point_cloud_display_render_hook = bpy.types.SpaceView3D.draw_handler_add(draw_point_clouds, (), 'WINDOW', 'POST_VIEW')
     
 def unregister():
     bpy.utils.unregister_class(PointCloudDisplaySettings)
     bpy.utils.unregister_class(PointCloudDisplaySettingsPropertiesPanel)
     bpy.utils.unregister_class(PointCloudDisplaySettings3DViewPanel)
     bpy.types.Mesh.point_cloud_display = None
-    bpy.types.SpaceView3D.draw_handler_remove(render_hook, 'WINDOW')
+    bpy.types.SpaceView3D.draw_handler_remove(bpy.point_cloud_display_render_hook, 'WINDOW')
     
 if __name__ == "__main__":
     register()
